@@ -1,0 +1,40 @@
+# LocalCowork 配置文件
+
+llm:
+  provider: ollama
+  model: qwen2.5-coder:32b
+  api_base: http://localhost:11434
+  temperature: 0.7
+  max_tokens: 4096
+
+agent:
+  max_iterations: 50          # 最大迭代次数
+  timeout: 300                # 单任务超时（秒）
+  verbose: true               # 显示详细日志
+  auto_approve: false         # 是否自动批准危险操作
+
+sandbox:
+  enabled: true
+  type: docker                # docker 或 local
+  image: local-cowork-sandbox:latest
+  memory_limit: 4g
+  cpu_limit: 4
+  network: bridge             # none/bridge/host
+
+workspace:
+  default_path: ./workspace
+  allowed_extensions:
+    - .txt
+    - .md
+    - .py
+    - .json
+    - .yaml
+    - .csv
+    - .docx
+    - .xlsx
+    - .pdf
+
+ui:
+  host: 0.0.0.0
+  port: 7860
+  share: false

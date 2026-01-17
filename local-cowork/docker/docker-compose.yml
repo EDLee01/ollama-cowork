@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: local-cowork-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]  # 如果有 GPU
+    restart: unless-stopped
+
+  sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: local-cowork-sandbox
+    volumes:
+      - ../workspace:/workspace
+    network_mode: bridge
+    mem_limit: 4g
+    cpus: 4
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ui
+    container_name: local-cowork-ui
+    ports:
+      - "7860:7860"
+    volumes:
+      - ../workspace:/app/workspace
+      - ../skills:/app/skills
+      - ../config:/app/config
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=ollama:11434
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
