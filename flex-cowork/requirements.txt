@@ -1,0 +1,29 @@
+# FlexCowork - 多API提供商支持的AI Agent系统
+
+# 核心依赖
+pydantic>=2.0
+loguru>=0.7.0
+rich>=13.0
+pyyaml>=6.0
+httpx>=0.25.0
+
+# LLM API 客户端
+openai>=1.0.0           # OpenAI & 兼容API (DeepSeek, Together等)
+anthropic>=0.18.0       # Claude API
+google-generativeai>=0.4.0  # Gemini API
+
+# Web UI
+gradio>=4.0.0
+
+# 文档生成
+python-docx>=0.8.11
+openpyxl>=3.1.0
+python-pptx>=0.6.21
+
+# 网络工具
+duckduckgo-search>=4.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+
+# 可选: Docker 沙盒
+docker>=6.0.0

@@ -1,0 +1,61 @@
+# FlexCowork 配置文件
+
+# LLM 提供商配置
+llm:
+  # 默认提供商: openai, claude, gemini, deepseek
+  default_provider: openai
+
+  providers:
+    openai:
+      api_key: ${OPENAI_API_KEY}      # 从环境变量读取
+      model: gpt-4o
+      api_base: null                   # 可选，用于兼容API
+
+    claude:
+      api_key: ${ANTHROPIC_API_KEY}
+      model: claude-sonnet-4-20250514
+
+    gemini:
+      api_key: ${GOOGLE_API_KEY}
+      model: gemini-1.5-pro
+
+    deepseek:
+      api_key: ${DEEPSEEK_API_KEY}
+      model: deepseek-chat
+
+  # 通用生成参数
+  temperature: 0.7
+  max_tokens: 4096
+
+# Agent 配置
+agent:
+  max_iterations: 50
+  timeout: 300
+  verbose: true
+  auto_approve: false
+
+# 沙盒配置
+sandbox:
+  enabled: false               # API 版本默认不使用 Docker 沙盒
+  type: local                  # local 或 docker
+
+# 工作区配置
+workspace:
+  default_path: ./workspace
+  allowed_extensions:
+    - .txt
+    - .md
+    - .py
+    - .json
+    - .yaml
+    - .csv
+    - .docx
+    - .xlsx
+    - .pdf
+
+# UI 配置
+ui:
+  host: 0.0.0.0
+  port: 7860
+  share: false
+  theme: soft                  # soft, default, glass
